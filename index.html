@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chip Baterista — Cursos Online de Batería</title>
+  <meta name="description" content="Cursos online de batería para bateristas que quieren crear, improvisar y sonar como ellos mismos." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* === RESET === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
+
+    /* === VARIABLES === */
+    :root {
+      --bg:          #0D0C0A;
+      --bg-card:     #1A1917;
+      --border:      #2A2825;
+      --text:        #F4EFE6;
+      --text-muted:  #9E9B94;
+      --yellow:      #E8B84B;
+      --yellow-dark: #C99A35;
+      --yellow-bg:   rgba(232,184,75,0.10);
+      --yellow-bdr:  rgba(232,184,75,0.30);
+
+      --f-head: 'Barlow Condensed', sans-serif;
+      --f-body: 'Barlow', sans-serif;
+      --f-mono: 'Space Mono', monospace;
+      --ease:   cubic-bezier(0.16,1,0.3,1);
+      --nav-h:  64px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--f-body);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section { padding: 80px 0; }
+
+    .label {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    /* === BOTONES === */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--f-body);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 13px 24px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background 150ms var(--ease), transform 150ms var(--ease), color 150ms var(--ease);
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--yellow); color: var(--bg); }
+    .btn-primary:hover { background: var(--yellow-dark); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--yellow); border: 1px solid var(--yellow); }
+    .btn-outline:hover { background: var(--yellow-bg); }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
+    .btn-sm { font-size: 13px; padding: 9px 18px; }
+
+    /* === SOCIAL ICON LINK === */
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      color: var(--text-muted);
+      border-radius: 4px;
+      transition: color 150ms var(--ease), background 150ms var(--ease);
+    }
+    .social-link:hover { color: var(--yellow); background: var(--yellow-bg); }
+    .social-link svg { width: 18px; height: 18px; fill: currentColor; }
+
+    /* ================================================
+       01 — NAV
+    ================================================ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: rgba(13,12,10,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav__logo img {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Separador visual entre íconos y botón */
+    .nav__sep {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+      margin: 0 10px;
+    }
+
+    .nav__cta {
+      font-family: var(--f-body);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 4px;
+      background: var(--yellow);
+      color: var(--bg);
+      transition: background 150ms var(--ease);
+      white-space: nowrap;
+    }
+    .nav__cta:hover { background: var(--yellow-dark); }
+
+    /* Ocultar texto del CTA en mobile muy pequeño */
+    @media (max-width: 420px) {
+      .nav__cta-text { display: none; }
+    }
+
+    /* ================================================
+       02 — HERO
+       bg-1-2048x1180.webp de fondo
+    ================================================ */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px;
+      background-image: url('_assets/bg-1-2048x1180.webp');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,12,10,0.60) 0%,
+        rgba(13,12,10,0.72) 55%,
+        rgba(13,12,10,0.96) 100%
+      );
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    /* Logo en el hero — más grande que en la nav */
+    .hero__logo {
+      height: 128px;
+      width: auto;
+      margin: 0 auto 32px;
+      display: block;
+    }
+
+    .hero__tag {
+      font-family: var(--f-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .hero__title {
+      font-family: var(--f-head);
+      font-weight: 800;
+      font-size: clamp(50px, 9vw, 96px);
+      line-height: 1.0;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .hero__title em { font-style: normal; color: var(--yellow); }
+
+    .hero__sub {
+      font-size: clamp(16px, 2vw, 18px);
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* ================================================
+       03 — SOBRE MINO
+    ================================================ */
+    .about {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .about__grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .about__photo-wrap { position: relative; }
+
+    .about__photo {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) { .about__photo { height: 360px; } }
+
+    /* Badge con segunda foto superpuesta */
+    .about__photo-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 6px;
+      border: 3px solid var(--bg-card);
+      outline: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) { .about__photo-badge { display: none; } }
+
+    .about__title {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .about__bio {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .about__bio em { font-style: italic; color: var(--text); }
+
+    .about__quote {
+      border-left: 3px solid var(--yellow);
+      background: var(--yellow-bg);
+      padding: 16px 20px;
+      border-radius: 0 4px 4px 0;
+      font-family: var(--f-head);
+      font-size: clamp(17px, 2vw, 21px);
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    .about__creds {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .about__cred {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .about__cred::before {
+      content: '◆';
+      color: var(--yellow);
+      font-size: 8px;
+      flex-shrink: 0;
+    }
+
+    /* ================================================
+       04 — CURSOS (CARRUSEL)
+    ================================================ */
+    .courses__header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .courses__title {
+      font-family: var(--f-head);
+      font-weight: 800;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.05;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    /* Flechas de navegación del carrusel */
+    .carousel-arrows {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .carousel-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 150ms var(--ease), color 150ms var(--ease), background 150ms var(--ease);
+      font-size: 18px;
+      line-height: 1;
+    }
+    .carousel-btn:hover { border-color: var(--yellow); color: var(--yellow); background: var(--yellow-bg); }
+
+    /* Track scrollable */
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 8px;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    /* Card de curso */
+    .course-card {
+      flex-shrink: 0;
+      width: 280px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      scroll-snap-align: start;
+      transition: border-color 200ms var(--ease), transform 200ms var(--ease);
+      display: flex;
+      flex-direction: column;
+    }
+    .course-card:hover { border-color: var(--yellow-bdr); transform: translateY(-2px); }
+
+    /* Imagen / cabecera de la card */
+    .course-card__img {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .course-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Fondo placeholder para cursos próximos */
+    .course-card__img--soon {
+      background: linear-gradient(135deg, #1a1710 0%, #0f0e0b 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .soon-pattern {
+      font-family: var(--f-head);
+      font-size: 64px;
+      font-weight: 800;
+      color: rgba(232,184,75,0.06);
+      letter-spacing: -0.05em;
+      user-select: none;
+      line-height: 1;
+    }
+
+    /* Badge de nivel / estado */
+    .course-card__badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-family: var(--f-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 3px;
+    }
+
+    .badge-level { background: rgba(13,12,10,0.80); color: var(--yellow); }
+    .badge-soon  { background: var(--yellow); color: var(--bg); }
+
+    /* Cuerpo de la card */
+    .course-card__body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .course-card__title {
+      font-family: var(--f-head);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .course-card__desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .course-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .course-card__price {
+      font-family: var(--f-mono);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--yellow);
+    }
+
+    .course-card__soon-label {
+      font-family: var(--f-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ================================================
+       05 — FAQ
+    ================================================ */
+    .faq {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+    }
+
+    .faq__header { text-align: center; margin-bottom: 48px; }
+
+    .faq__title {
+      font-family: var(--f-head);
+      font-weight: 700;
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--text);
+    }
+
+    .faq__list {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+
+    .faq-item__q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .faq-item__q-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      transition: color 150ms var(--ease);
+    }
+    .faq-item__q:hover .faq-item__q-text { color: var(--yellow); }
+
+    .faq-item__icon {
+      font-family: var(--f-mono);
+      font-size: 22px;
+      color: var(--yellow);
+      flex-shrink: 0;
+      line-height: 1;
+      transition: transform 250ms var(--ease);
+    }
+    .faq-item.is-open .faq-item__icon { transform: rotate(45deg); }
+
+    .faq-item__a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 300ms var(--ease);
+    }
+    .faq-item__a.is-open { max-height: 300px; }
+
+    .faq-item__a-inner {
+      padding-bottom: 20px;
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* ================================================
+       FOOTER
+    ================================================ */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .footer__grid { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 20px; }
+    }
+
+    .footer__logo img { height: 32px; width: auto; opacity: 0.6; }
+
+    .footer__links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .footer__link {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 150ms var(--ease);
+    }
+    .footer__link:hover { color: var(--text); }
+
+    .footer__social {
+      display: flex;
+      gap: 4px;
+    }
+
+    .footer__legal {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .footer__legal a:hover { color: var(--text); }
+
+    /* ================================================
+       WHATSAPP — botón flotante
+    ================================================ */
+    /*
+      Reemplazar NUMERO con el número en formato internacional sin espacios.
+      Ejemplo: 5491112345678 (54 = Argentina, 9 = móvil, 11 = CABA, 12345678 = número)
+    */
+    .wa-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 300;
+      width: 52px;
+      height: 52px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+    }
+    .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,0,0,0.5); }
+    .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* ================================================
+       STICKY CTA — solo mobile
+    ================================================ */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+      background: linear-gradient(to top, var(--bg) 70%, transparent);
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(100%);
+      pointer-events: none;
+      transition: opacity 250ms var(--ease), transform 250ms var(--ease);
+    }
+    .sticky-cta.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    @media (min-width: 769px) { .sticky-cta { display: none; } }
+    .sticky-cta .btn { width: 100%; max-width: 380px; padding: 15px; }
+
+    /* ================================================
+       RESPONSIVE GENERAL
+    ================================================ */
+    @media (max-width: 768px) {
+      .section { padding: 56px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================================================
+    01 — NAV
+    Logo + redes sociales + CTA
+  ================================================ -->
+  <nav class="nav">
+    <div class="wrap">
+      <div class="nav__inner">
+
+        <a href="#inicio" class="nav__logo">
+          <img src="_assets/MinoBateristaLogo.svg" alt="Chip Baterista" />
+        </a>
+
+        <div class="nav__right">
+
+          <!-- YouTube -->
+          <a class="social-link" href="https://www.youtube.com/@chipbaterista/videos" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+          </a>
+
+          <!-- Instagram -->
+          <a class="social-link" href="https://www.instagram.com/chipbaterista/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+
+          <!-- TikTok -->
+          <a class="social-link" href="https://www.tiktok.com/@chipbaterista" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+          </a>
+
+          <div class="nav__sep"></div>
+
+          <a href="#cursos" class="nav__cta">
+            <span class="nav__cta-text">Ver cursos</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ================================================
+    02 — HERO
+    bg-1-2048x1180.webp de fondo
+    Logo + titular amplio + CTA
+  ================================================ -->
+  <section class="hero" id="inicio">
+    <div class="hero__content">
+
+      <!-- Logo grande en el hero -->
+      <img
+        class="hero__logo"
+        src="_assets/MinoBateristaLogo.svg"
+        alt="Chip Baterista"
+      />
+
+      <span class="hero__tag">Cursos Online de Batería</span>
+
+      <h1 class="hero__title">
+        Aprendé a crear.<br>
+        A improvisar.<br>
+        A sonar como <em>vos.</em>
+      </h1>
+
+      <p class="hero__sub">
+        Fills, grooves, improvisación y creatividad.<br>
+        Cursos para bateristas que quieren ir más allá de repetir ejercicios.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#cursos" class="btn btn-primary">Ver cursos</a>
+        <!--
+          Reemplazar NUMERO con el número de WhatsApp en formato internacional.
+          Ejemplo para Argentina: 5491112345678
+        -->
+        <a href="https://wa.me/NUMERO?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20los%20cursos%20de%20bater%C3%ADa" target="_blank" class="btn btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.855L.057 23.493a.75.75 0 0 0 .914.914l5.638-1.475A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.5-5.241-1.374l-.375-.217-3.893 1.019 1.019-3.893-.217-.375A9.956 9.956 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/>
+          </svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================================================
+    03 — SOBRE MINO
+    Foto minop-3 + bio + quote
+  ================================================ -->
+  <section class="about section" id="mino">
+    <div class="wrap">
+      <div class="about__grid">
+
+        <div class="about__photo-wrap">
+          <img
+            class="about__photo"
+            src="_assets/minop-3-578x800.webp"
+            alt="Mino Galgano tocando batería"
+          />
+          <img
+            class="about__photo-badge"
+            src="_assets/mino-1-637x800.webp"
+            alt="Mino en acción"
+          />
+        </div>
+
+        <div>
+          <span class="label">Quién enseña</span>
+
+          <h2 class="about__title">
+            Ramiro "Mino" Galgano.<br>
+            Baterista.
+          </h2>
+
+          <p class="about__bio">
+            Empecé a los 8 años viendo Metallica en la tele y no paré más.
+            25 años tocando en todo tipo de contextos — bandas, estudios, escenarios.
+          </p>
+
+          <p class="about__bio">
+            Cuando empecé a dar clases me di cuenta de algo: mis alumnos aprendían a ejecutar,
+            pero no podían <em>crear</em>. Podían seguir instrucciones, pero no improvisar,
+            no fluir, no sonar como ellos mismos.
+          </p>
+
+          <blockquote class="about__quote">
+            "No enseño técnica básica. Enseño las mañas.
+            Lo que convierte a alguien que toca en alguien que crea."
+          </blockquote>
+
+          <ul class="about__creds">
+            <li class="about__cred">25 años tocando</li>
+            <li class="about__cred">5 años enseñando online</li>
+            <li class="about__cred">+200 alumnos en toda América Latina</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+    04 — CURSOS
+    Carrusel horizontal con flechas
+  ================================================ -->
+  <section class="section" id="cursos">
+    <div class="wrap">
+
+      <div class="courses__header">
+        <div>
+          <span class="label">Cursos disponibles</span>
+          <h2 class="courses__title">Elegí por dónde empezar.</h2>
+        </div>
+        <!-- Flechas de navegación -->
+        <div class="carousel-arrows">
+          <button class="carousel-btn" onclick="shiftCarousel(-1)" aria-label="Anterior">&#8592;</button>
+          <button class="carousel-btn" onclick="shiftCarousel(1)"  aria-label="Siguiente">&#8594;</button>
+        </div>
+      </div>
+
+      <div class="carousel-track" id="carousel-track">
+
+        <!-- ── CARD 1: curso disponible ─────────────────── -->
+        <div class="course-card">
+          <div class="course-card__img">
+            <img src="_assets/thumbnail-portada-curso-247x296.webp" alt="Curso de Fills" />
+            <span class="course-card__badge badge-level">Principiante / Intermedio</span>
+          </div>
+          <div class="course-card__body">
+            <h3 class="course-card__title">Fills: Aprendé a Inventar el Tuyo</h3>
+            <p class="course-card__desc">
+              El fill es el momento de mayor ansiedad para cualquier baterista.
+              Acá aprendés a crear los tuyos desde cero — sin copiar, sin depender de nadie.
+            </p>
+            <div class="course-card__footer">
+              <span class="course-card__price">$39 USD</span>
+              <a
+                href="https://chipbaterista.online/producto/curso-de-fills-aprende-a-inventar-el-tuyo/"
+                target="_blank"
+                class="btn btn-primary btn-sm"
+              >Ver curso →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── CARD 2: próximamente ──────────────────────── -->
+        <div class="course-card">
+          <div class="course-card__img course-card__img--soon">
+            <span class="soon-pattern">G</span>
+            <span class="course-card__badge badge-soon">Próximamente</span>
+          </div>
+          <div class="course-card__body">
+            <h3 class="course-card__title">Grooves: Construí tu Ritmo</h3>
+            <p class="course-card__desc">
+              El groove es el lenguaje del baterista. Aprendé a construir el tuyo,
+              a darle personalidad y a adaptarlo a cualquier canción.
+            </p>
+            <div class="course-card__footer">
+              <span class="course-card__soon-label">En desarrollo</span>
+              <a
+                href="https://wa.me/NUMERO?text=Hola!%20Me%20interesa%20el%20curso%20de%20Grooves%2C%20%C2%BFcu%C3%A1ndo%20sale%3F"
+                target="_blank"
+                class="btn btn-ghost btn-sm"
+              >Notificarme</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── CARD 3: próximamente ──────────────────────── -->
+        <div class="course-card">
+          <div class="course-card__img course-card__img--soon">
+            <span class="soon-pattern">I</span>
+            <span class="course-card__badge badge-soon">Próximamente</span>
+          </div>
+          <div class="course-card__body">
+            <h3 class="course-card__title">Improvisación: Tocá Sin Pensar</h3>
+            <p class="course-card__desc">
+              Herramientas para dejar de bloquearte y empezar a fluir.
+              Improvisación práctica para bateristas de nivel intermedio.
+            </p>
+            <div class="course-card__footer">
+              <span class="course-card__soon-label">En desarrollo</span>
+              <a
+                href="https://wa.me/NUMERO?text=Hola!%20Me%20interesa%20el%20curso%20de%20Improvisaci%C3%B3n%2C%20%C2%BFcu%C3%A1ndo%20sale%3F"
+                target="_blank"
+                class="btn btn-ghost btn-sm"
+              >Notificarme</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── CARD 4: próximamente ──────────────────────── -->
+        <div class="course-card">
+          <div class="course-card__img course-card__img--soon">
+            <span class="soon-pattern">R</span>
+            <span class="course-card__badge badge-soon">Próximamente</span>
+          </div>
+          <div class="course-card__body">
+            <h3 class="course-card__title">Rudimentos: La Base de Todo</h3>
+            <p class="course-card__desc">
+              Los rudimentos que realmente usás cuando tocás.
+              Sin relleno, sin ejercicios de academia — solo lo que importa.
+            </p>
+            <div class="course-card__footer">
+              <span class="course-card__soon-label">En desarrollo</span>
+              <a
+                href="https://wa.me/NUMERO?text=Hola!%20Me%20interesa%20el%20curso%20de%20Rudimentos%2C%20%C2%BFcu%C3%A1ndo%20sale%3F"
+                target="_blank"
+                class="btn btn-ghost btn-sm"
+              >Notificarme</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /carousel-track -->
+
+    </div>
+  </section>
+
+
+  <!-- ================================================
+    05 — FAQ
+  ================================================ -->
+  <section class="faq section" id="faq">
+    <div class="wrap">
+
+      <div class="faq__header">
+        <h2 class="faq__title">Preguntas frecuentes.</h2>
+      </div>
+
+      <div class="faq__list">
+
+        <div class="faq-item">
+          <div class="faq-item__q" onclick="toggleFaq(this)">
+            <span class="faq-item__q-text">¿Necesito tener batería para hacer los cursos?</span>
+            <span class="faq-item__icon">+</span>
+          </div>
+          <div class="faq-item__a">
+            <p class="faq-item__a-inner">
+              No es indispensable, pero es lo ideal. Con pad de práctica o batería electrónica también funciona perfectamente.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-item__q" onclick="toggleFaq(this)">
+            <span class="faq-item__q-text">¿Puedo comprar un módulo solo, sin el curso completo?</span>
+            <span class="faq-item__icon">+</span>
+          </div>
+          <div class="faq-item__a">
+            <p class="faq-item__a-inner">
+              Cada curso es un módulo independiente. Comprás el que te interesa, cuando querés.
+              No hace falta comprar paquetes — vas a tu ritmo y sumás lo que necesitás.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-item__q" onclick="toggleFaq(this)">
+            <span class="faq-item__q-text">¿Cuánto tiempo tengo para ver el material?</span>
+            <span class="faq-item__icon">+</span>
+          </div>
+          <div class="faq-item__a">
+            <p class="faq-item__a-inner">
+              De por vida. Una vez que comprás, el acceso es tuyo para siempre. Volvés cuando quieras, las veces que quieras.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-item__q" onclick="toggleFaq(this)">
+            <span class="faq-item__q-text">¿Puedo pagar con Mercado Pago?</span>
+            <span class="faq-item__icon">+</span>
+          </div>
+          <div class="faq-item__a">
+            <p class="faq-item__a-inner">
+              Sí. Aceptamos PayPal y Mercado Pago. Si tenés otro método, escribime por WhatsApp y lo resolvemos.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-item__q" onclick="toggleFaq(this)">
+            <span class="faq-item__q-text">¿Qué pasa si un curso no me sirve?</span>
+            <span class="faq-item__icon">+</span>
+          </div>
+          <div class="faq-item__a">
+            <p class="faq-item__a-inner">
+              Tenés 30 días para pedirme el reembolso. Sin preguntas, sin formularios. Mandame un mensaje y listo.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================
+    FOOTER
+  ================================================ -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__grid">
+
+        <div class="footer__logo">
+          <img src="_assets/MinoBateristaLogo.svg" alt="Chip Baterista" />
+        </div>
+
+        <nav class="footer__links">
+          <a href="#inicio" class="footer__link">Inicio</a>
+          <a href="#mino"   class="footer__link">Quién enseña</a>
+          <a href="#cursos" class="footer__link">Cursos</a>
+          <a href="#faq"    class="footer__link">FAQ</a>
+        </nav>
+
+        <div class="footer__social">
+          <a class="social-link" href="https://www.youtube.com/@chipbaterista/videos" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+          </a>
+          <a class="social-link" href="https://www.instagram.com/chipbaterista/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a class="social-link" href="https://www.tiktok.com/@chipbaterista" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+          </a>
+        </div>
+
+        <div class="footer__legal">
+          © 2024 Chip Baterista · Ramiro Galgano ·
+          <a href="#" style="color:inherit;">Privacidad</a>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ================================================
+    WHATSAPP — botón flotante
+    Reemplazar NUMERO con el número real en formato internacional.
+    Ejemplo Argentina: 5491112345678
+  ================================================ -->
+  <a
+    class="wa-float"
+    href="https://wa.me/NUMERO?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20los%20cursos%20de%20bater%C3%ADa"
+    target="_blank"
+    rel="noopener"
+    aria-label="Contactar por WhatsApp"
+  >
+    <svg viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.855L.057 23.493a.75.75 0 0 0 .914.914l5.638-1.475A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.5-5.241-1.374l-.375-.217-3.893 1.019 1.019-3.893-.217-.375A9.956 9.956 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/>
+    </svg>
+  </a>
+
+
+  <!-- ================================================
+    STICKY CTA MOBILE
+  ================================================ -->
+  <div class="sticky-cta" id="sticky-cta">
+    <a href="#cursos" class="btn btn-primary">Ver cursos</a>
+  </div>
+
+
+  <script>
+    /* Acordeón FAQ */
+    function toggleFaq(qEl) {
+      var item   = qEl.closest('.faq-item');
+      var answer = item.querySelector('.faq-item__a');
+      var open   = item.classList.contains('is-open');
+      document.querySelectorAll('.faq-item').forEach(function(fi) {
+        fi.classList.remove('is-open');
+        fi.querySelector('.faq-item__a').classList.remove('is-open');
+      });
+      if (!open) { item.classList.add('is-open'); answer.classList.add('is-open'); }
+    }
+
+    /* Carrusel — desplazamiento por flechas */
+    function shiftCarousel(dir) {
+      var track = document.getElementById('carousel-track');
+      var card  = track.querySelector('.course-card');
+      if (!card) return;
+      var step = card.offsetWidth + 20; /* ancho card + gap */
+      track.scrollBy({ left: dir * step, behavior: 'smooth' });
+    }
+
+    /* Sticky CTA mobile — aparece al pasar el hero */
+    (function() {
+      var cta  = document.getElementById('sticky-cta');
+      var hero = document.getElementById('inicio');
+      function update() {
+        cta.classList.toggle('show', hero.getBoundingClientRect().bottom < 0);
+      }
+      window.addEventListener('scroll', update, { passive: true });
+    })();
+
+    /* Smooth scroll con offset por nav */
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var t = document.querySelector(this.getAttribute('href'));
+        if (t) {
+          e.preventDefault();
+          window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 64, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
